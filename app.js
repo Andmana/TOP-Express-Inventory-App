@@ -1,4 +1,5 @@
 import "dotenv/config";
+import colors from "colors";
 import express from "express";
 import url from "url";
 import path from "path";
@@ -10,8 +11,8 @@ const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Set up view engine
-app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 // Setup form req
 app.use(express.urlencoded({ extended: true }));
@@ -21,6 +22,10 @@ app.use(express.static(path.join(__dirname, "public")));
 // Middlewares
 // Logger
 app.use(loggerMiddleware);
+
+app.get("/", (req, res) => {
+  res.render("index"); // Renders 'index.ejs' in the 'views' folder
+});
 
 //
 app.listen(PORT, () => {

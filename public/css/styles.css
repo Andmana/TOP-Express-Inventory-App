@@ -12,7 +12,8 @@ footer.style-footer {
 }
 
 @media screen and (min-width: 576px) {
-  nav.style-nav {
+  nav.style-nav,
+  .main-content {
     padding-right: 100px !important;
     padding-left: 100px !important;
   }
