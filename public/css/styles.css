@@ -1,0 +1,19 @@
+nav.style-nav {
+  background-color: #ff9148b5 !important;
+  border-bottom: 2px solid #ff6700;
+}
+
+footer.style-footer {
+  background-color: #ff9148b5;
+  border-top: 2px solid #ff6700;
+  display: flex;
+  justify-content: center;
+  gap: 1ch;
+}
+
+@media screen and (min-width: 576px) {
+  nav.style-nav {
+    padding-right: 100px !important;
+    padding-left: 100px !important;
+  }
+}
