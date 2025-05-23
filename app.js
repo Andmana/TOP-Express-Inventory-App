@@ -6,6 +6,7 @@ import path from "path";
 
 import loggerMiddleware from "./middlewares/loggerMiddleware.js";
 
+import homeRouter from "./routes/homeRoute.js";
 import categoryRouter from "./routes/categoryRoute.js";
 
 const PORT = process.env.PORT || 8000;
@@ -26,11 +27,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(loggerMiddleware); // Logger
 
 // Routes
+app.use("/", homeRouter);
 app.use("/categories", categoryRouter); // Categories Routes
-
-app.get("/", (req, res) => {
-  res.render("index", { activeNav: "home" }); // Renders 'index.ejs' in the 'views' folder
-});
 
 //
 app.listen(PORT, () => {
