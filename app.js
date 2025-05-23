@@ -29,7 +29,7 @@ app.use(loggerMiddleware); // Logger
 app.use("/categories", categoryRouter); // Categories Routes
 
 app.get("/", (req, res) => {
-  res.render("index"); // Renders 'index.ejs' in the 'views' folder
+  res.render("index", { activeNav: "home" }); // Renders 'index.ejs' in the 'views' folder
 });
 
 //
