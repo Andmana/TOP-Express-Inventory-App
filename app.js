@@ -3,7 +3,10 @@ import colors from "colors";
 import express from "express";
 import url from "url";
 import path from "path";
+
 import loggerMiddleware from "./middlewares/loggerMiddleware.js";
+
+import categoryRouter from "./routes/categoryRoute.js";
 
 const PORT = process.env.PORT || 8000;
 const app = express();
@@ -20,8 +23,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // Middlewares
-// Logger
-app.use(loggerMiddleware);
+app.use(loggerMiddleware); // Logger
+
+// Routes
+app.use("/categories", categoryRouter); // Categories Routes
 
 app.get("/", (req, res) => {
   res.render("index"); // Renders 'index.ejs' in the 'views' folder
