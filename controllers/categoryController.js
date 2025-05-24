@@ -5,7 +5,6 @@ export const getAllCategories = async (req, res) => {
 
   res.render("category/index", {
     categories,
-    activeNav: "categories",
   });
 };
 
