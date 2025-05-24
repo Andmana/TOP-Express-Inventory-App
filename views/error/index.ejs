@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Dependencies  header -->
+    <%- include('../partials/_head') %>
+
+    <!-- Title -->
+    <title>FooDrinks</title>
+  </head>
+  <body class="min-vh-100 d-flex flex-column">
+    <!-- Navbar -->
+    <%- include("../partials/_navbar", { activeNav: 'home' }) %>
+
+    <!-- Main Content -->
+    <main class="flex-grow-1 d-flex flex-column main-content">
+      <div
+        class="flex-fill pt-5 pb-3 d-flex flex-column justify-content-center align-items-center"
+      >
+        <h1><%= code %></h1>
+
+        <p><%= message %></p>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <%- include("../partials/_footer") %>
+  </body>
+</html>
