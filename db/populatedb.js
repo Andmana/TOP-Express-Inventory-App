@@ -14,11 +14,11 @@ CREATE TABLE IF NOT EXISTS categories (
 );
 
 INSERT INTO categories (name, color, icon) VALUES
-  ('Fruits', '#FF6347', 'fruit.svg'),
-  ('Vegetables', '#32CD32', 'vegetable.svg'),
+  ('Fruits', '#FF6347', 'fruits.svg'),
+  ('Vegetables', '#32CD32', 'vegetables.svg'),
   ('Dairy', '#FFD700', 'dairy.svg'),
-  ('Bakery', '#FF69B4', 'bread.svg'),
-  ('Beverages', '#1E90FF', 'drink.svg');
+  ('Bakery', '#FF69B4', 'bakery.svg'),
+  ('Beverages', '#1E90FF', 'beverages.svg');
 `;
 
 async function main() {

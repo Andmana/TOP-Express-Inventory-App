@@ -97,12 +97,17 @@ li {
 #categories-container .card-category {
   margin: 0;
   width: 200px;
-  height: 150px;
+  height: 170px;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
   background-color: var(--color);
   border-radius: 10px;
+}
+
+.icons {
+  width: 80px;
+  height: 80px;
 }
 
 #categories-container {
