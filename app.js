@@ -5,9 +5,8 @@ import url from "url";
 import path from "path";
 
 import loggerMiddleware from "./middlewares/loggerMiddleware.js";
-import errorMiddleware, {
-  errorNotFound,
-} from "./middlewares/errorMiddleware.js";
+import errorMiddleware from "./middlewares/errorMiddleware.js";
+import notFondMiddleware from "./middlewares/notFoundMiddleware.js";
 
 import homeRouter from "./routes/homeRoute.js";
 import categoryRouter from "./routes/categoryRoute.js";
@@ -35,7 +34,7 @@ app.use("/", homeRouter);
 app.use("/categories", categoryRouter); // Categories Routes
 
 // Error handle
-app.use(errorNotFound); // error route not found
+app.use(notFondMiddleware); // error route not found
 app.use(errorMiddleware); // error render handle
 
 //

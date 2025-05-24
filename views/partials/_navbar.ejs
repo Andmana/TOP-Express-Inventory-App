@@ -42,6 +42,7 @@
 
 <script>
   const activeNav = "<%= activeNav %>";
+  if (activeNav === "") return;
   // Add 'active' class to the nav-link with the ID matching activeNav
   $(`#${activeNav}`).addClass("active");
   // Set aria-current="page" for accessibility on the active nav-link
