@@ -8,7 +8,20 @@
     <%- include("../partials/_navbar", { activeNav : 'categories' }) %>
 
     <main class="flex-grow-1 main-content">
-      <div class="pt-5 pb-3">Categories 11</div>
+      <div class="my-5 d-flex align-items-center gap-4">
+        <h1 class="inline">Categories</h1>
+        <a
+          href="/categories/create"
+          class="btn btn-sm custom-border"
+          style="background-color: var(--color-theme-1)"
+          >add categories</a
+        >
+      </div>
+      <ul id="categories-container" class="d-flex flex-wrap gap-4">
+        <% categories.forEach(category => { %>
+        <!-- Card Category -->
+        <%- include('./_cardCategory', {category})%> <% }); %>
+      </ul>
     </main>
 
     <%- include("../partials/_footer") %>

@@ -18,7 +18,7 @@ INSERT INTO categories (name, color, icon) VALUES
   ('Vegetables', '#32CD32', 'vegetable.svg'),
   ('Dairy', '#FFD700', 'dairy.svg'),
   ('Bakery', '#FF69B4', 'bread.svg'),
-  ('BeveragesDEV', '#1E90FF', 'drink.svg');
+  ('Beverages', '#1E90FF', 'drink.svg');
 `;
 
 async function main() {

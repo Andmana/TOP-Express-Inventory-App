@@ -1,0 +1,8 @@
+<li class="card-category" style="--color: <%= category.color || '#ccc' %>">
+  <a
+    class="p-3 w-100 h-100 d-flex justify-content-center align-items-end text-decoration-none"
+    href="/products?categories=<%= encodeURIComponent(category.name.toLowerCase()) %>"
+  >
+    <span class="fs-4 fw-semibold text-black"><%= category.name %></span>
+  </a>
+</li>

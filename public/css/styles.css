@@ -88,3 +88,25 @@ nav.style-nav,
 .bg-banner-2:hover::before {
   transform: scale(1.2);
 }
+
+li {
+  list-style: none; /* Removes bullet points */
+  margin: 0; /* Removes default margin */
+}
+
+#categories-container .card-category {
+  margin: 0;
+  width: 200px;
+  height: 150px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  background-color: var(--color);
+  border-radius: 10px;
+}
+
+#categories-container {
+  list-style: none; /* Removes bullet points */
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
+}
