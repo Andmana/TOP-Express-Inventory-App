@@ -54,35 +54,65 @@
               class="form-control"
               id="icon"
               name="iconImage"
+              accept=".svg"
             />
+            <div class="invalid-feedback" id="icon-error">
+              File must be an SVG and max 15 KB.
+            </div>
           </div>
+
           <button type="submit" class="btn btn-light w-100 mt-5">Submit</button>
         </form>
       </div>
     </main>
+
+    <!-- jQuery (make sure it's loaded before this script) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
-      (() => {
-        "use strict";
+      $(function () {
+        const $form = $(".needs-validation");
+        const $iconInput = $("#icon");
+        const $iconError = $("#icon-error");
 
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll(".needs-validation");
+        $iconInput.on("change", function () {
+          const file = this.files[0];
+          $iconInput.removeClass("is-invalid");
 
-        // Loop over them and prevent submission
-        Array.from(forms).forEach((form) => {
-          form.addEventListener(
-            "submit",
-            (event) => {
-              if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
+          if (file) {
+            const isSvg = file.type === "image/svg+xml";
+            const isSizeOk = file.size <= 15 * 1024;
 
-              form.classList.add("was-validated");
-            },
-            false
-          );
+            if (!isSvg || !isSizeOk) {
+              $iconInput.addClass("is-invalid");
+            }
+          }
         });
-      })();
+
+        $form.on("submit", function (event) {
+          const file = $iconInput[0].files[0];
+          let fileValid = true;
+
+          if (file) {
+            const isSvg = file.type === "image/svg+xml";
+            const isSizeOk = file.size <= 15 * 1024;
+
+            if (!isSvg || !isSizeOk) {
+              $iconInput.addClass("is-invalid");
+              fileValid = false;
+            } else {
+              $iconInput.removeClass("is-invalid");
+            }
+          }
+
+          if (this.checkValidity() === false || !fileValid) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          $(this).addClass("was-validated");
+        });
+      });
     </script>
   </body>
 </html>
