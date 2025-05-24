@@ -1,11 +1,19 @@
 import categoryRepository from "../repositories/categoryRepository.js";
 
-export const getAllCategories = async (req, res) => {
-  const categories = await categoryRepository.getAllCategories();
-
-  res.render("category/index", {
-    categories,
-  });
+/**
+ *
+ * @desc  GET all categories
+ * @route GET /categories
+ */
+const getAllCategories = async (req, res, next) => {
+  try {
+    const categories = await categoryRepository.getAllCategories();
+    res.render("category/index", {
+      categories,
+    });
+  } catch (error) {
+    next(new Error("Internal server error"));
+  }
 };
 
 export default { getAllCategories };
