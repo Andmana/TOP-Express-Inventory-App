@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg style-nav">
-  <div class="container-fluid">
-    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+  <div class="container-fluid p-0">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="/">
       <img src="/icons/logo.svg" style="width: 35px" alt="" />
       FooDrinks</a
     >
@@ -42,9 +42,10 @@
 
 <script>
   const activeNav = "<%= activeNav %>";
-  if (activeNav === "") return;
-  // Add 'active' class to the nav-link with the ID matching activeNav
-  $(`#${activeNav}`).addClass("active");
-  // Set aria-current="page" for accessibility on the active nav-link
-  $(`#${activeNav}`).attr("aria-current", "page");
+  if (!activeNav === "") {
+    // Add 'active' class to the nav-link with the ID matching activeNav
+    $(`#${activeNav}`).addClass("active");
+    // Set aria-current="page" for accessibility on the active nav-link
+    $(`#${activeNav}`).attr("aria-current", "page");
+  }
 </script>
