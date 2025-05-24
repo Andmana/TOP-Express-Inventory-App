@@ -1,7 +1,6 @@
 import categoryRepository from "../repositories/categoryRepository.js";
 
 /**
- *
  * @desc  GET all categories
  * @route GET /categories
  */
@@ -16,4 +15,16 @@ const getAllCategories = async (req, res, next) => {
   }
 };
 
-export default { getAllCategories };
+/**
+ * @desc  GET create categories form view
+ * @route GET /categories/create
+ */
+const getCreate = async (req, res, next) => {
+  try {
+    res.render("category/create");
+  } catch (error) {
+    next(new Error("Internal server error"));
+  }
+};
+
+export default { getAllCategories, getCreate };

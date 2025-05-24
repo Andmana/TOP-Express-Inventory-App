@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/_head') %>
+    <title>FooDrink | Create Category</title>
+  </head>
+  <body>
+    <%- include("../partials/_navbar", { activeNav : 'categories' }) %>
+
+    <main class="flex-grow-1 main-content">
+      <div class="my-5">
+        <h1>Create Category</h1>
+      </div>
+      <div class="w-100 px-3 py-3 px-lg-5 py-lg-4 custom-border bg-theme-1">
+        <form
+          action="/categories/create"
+          method="post"
+          enctype="multipart/form-data"
+          class="needs-validation"
+          novalidate
+        >
+          <!-- Input Category -->
+          <div class="mb-3">
+            <label for="name" class="form-label"> Category name </label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              required
+            />
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please choose a name.</div>
+          </div>
+
+          <!-- Input Color -->
+          <div class="mb-3">
+            <label for="favcolor" class="form-label"> Color label </label>
+            <input
+              type="color"
+              class="form-control p-3"
+              style="width: 100px; height: 80px"
+              id="favcolor"
+              name="favcolor"
+              value="#ff0000"
+            />
+          </div>
+
+          <!-- Icon image -->
+          <div class="mb-3">
+            <label for="icon" class="form-label"> Icon </label>
+            <input
+              type="file"
+              class="form-control"
+              id="icon"
+              name="iconImage"
+            />
+          </div>
+          <button type="submit" class="btn btn-light w-100 mt-5">Submit</button>
+        </form>
+      </div>
+    </main>
+    <script>
+      (() => {
+        "use strict";
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll(".needs-validation");
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach((form) => {
+          form.addEventListener(
+            "submit",
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+    </script>
+  </body>
+</html>
