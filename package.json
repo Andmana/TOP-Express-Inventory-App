@@ -8,7 +8,8 @@
     "start": "node app.js",
     "dev": " nodemon --env-file=.env.dev app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "populate": "node --env-file=.env.dev db/populatedb.js"
+    "populateprod": "node db/populatedb.js",
+    "populatedev": "node --env-file=.env.dev db/populatedb.js"
   },
   "keywords": [],
   "author": "",

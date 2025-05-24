@@ -1,6 +1,9 @@
 import { Client } from "pg";
 import "dotenv/config";
 
+const IS_DEV = process.env.NODE_ENV === "dev";
+const CONNECTION_STRING = process.env.CONNECTION_STRING;
+
 const SQL = `
 DROP TABLE IF EXISTS categories;
 CREATE TABLE IF NOT EXISTS categories (
@@ -15,14 +18,15 @@ INSERT INTO categories (name, color, icon) VALUES
   ('Vegetables', '#32CD32', 'vegetable.svg'),
   ('Dairy', '#FFD700', 'dairy.svg'),
   ('Bakery', '#FF69B4', 'bread.svg'),
-  ('Beverages', '#1E90FF', 'drink.svg');
+  ('BeveragesDEV', '#1E90FF', 'drink.svg');
 `;
 
 async function main() {
   console.log("Seeding...");
+
   const client = new Client({
-    connectionString: process.env.CONNECTION_STRING,
-    ssl: { rejectUnauthorized: false }, // ssl option adjusted for security
+    connectionString: CONNECTION_STRING,
+    ssl: IS_DEV ? false : { rejectUnauthorized: false }, // ssl option adjusted for security
   });
 
   try {
