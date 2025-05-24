@@ -5,6 +5,10 @@
   --rgb-2: 255, 83, 73;
 }
 
+.bg-theme-1 {
+  background-color: rgba(var(--rgb-2), 0.3) !important;
+}
+
 nav.style-nav {
   background-color: rgba(var(--rgb-1), 0.5) !important;
   border-bottom: 2px solid var(--color-theme-1);
@@ -114,4 +118,10 @@ li {
   list-style: none; /* Removes bullet points */
   margin: 0; /* Removes default margin */
   padding: 0; /* Removes default padding */
+}
+
+.max-w-400 {
+  max-width: 400px;
+  margin: auto;
+  position: relative;
 }
