@@ -1,4 +1,5 @@
 import colors from "colors";
+import path from "path";
 
 const METHOD_COLORS = {
   GET: "green",
@@ -9,6 +10,10 @@ const METHOD_COLORS = {
 
 // Logger middleware
 const loggerMiddleware = (req, res, next) => {
+  // Exclude static files request
+  const staticFileExt = path.extname(req.originalUrl);
+  if (staticFileExt != "") return next();
+
   const color = METHOD_COLORS[req.method] || "white";
   console.log(
     `${req.method} ${req.protocol}://${req.get("host")}${req.originalUrl}`[
