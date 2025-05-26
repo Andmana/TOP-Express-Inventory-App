@@ -11,6 +11,7 @@
       <div class="my-5">
         <h1>Create Category</h1>
       </div>
+
       <div class="w-100 px-3 py-3 px-lg-5 py-lg-4 custom-border bg-theme-1">
         <form
           action="/categories/create"
@@ -19,93 +20,147 @@
           class="needs-validation"
           novalidate
         >
-          <!-- Input Category -->
-          <div class="mb-3">
-            <label for="name" class="form-label"> Category name </label>
+          <!-- Category Name -->
+          <div class="mb-4">
+            <label for="name" class="form-label fw-semibold"
+              >Category Name</label
+            >
             <input
               type="text"
-              class="form-control"
+              class="form-control <%= error?.name ? 'is-invalid' : '' %>"
               id="name"
               name="name"
               required
+              value="<%= typeof name !== 'undefined' ? name : '' %>"
             />
             <div class="valid-feedback">Looks good!</div>
-            <div class="invalid-feedback">Please choose a name.</div>
+            <div class="invalid-feedback">
+              Please provide a valid category name.
+            </div>
+            <% if (error?.name) { %>
+            <div class="error-validation text-danger mt-1">
+              <%= error.name %>
+            </div>
+            <% } %>
           </div>
 
-          <!-- Input Color -->
-          <div class="mb-3">
-            <label for="favcolor" class="form-label"> Color label </label>
-            <input
-              type="color"
-              class="form-control p-3"
-              style="width: 100px; height: 80px"
-              id="favcolor"
-              name="favcolor"
-              value="#ff0000"
-            />
+          <!-- Color Picker -->
+          <div class="mb-4">
+            <label for="color" class="form-label fw-semibold"
+              >Color Label</label
+            >
+            <div class="d-flex align-items-center">
+              <input
+                type="color"
+                class="form-control form-control-color p-1"
+                id="color"
+                name="color"
+                value="<%= color || '#fff' %>"
+                title="Choose category color"
+              />
+              <span class="ms-2"><%= color || '#fff' %></span>
+            </div>
           </div>
 
-          <!-- Icon image -->
-          <div class="mb-3">
-            <label for="icon" class="form-label"> Icon </label>
+          <!-- Icon Upload -->
+          <div class="mb-4">
+            <label for="icon" class="form-label fw-semibold"
+              >Icon (SVG only)</label
+            >
             <input
               type="file"
               class="form-control"
               id="icon"
-              name="iconImage"
+              name="icon"
               accept=".svg"
             />
-            <div class="invalid-feedback" id="icon-error">
-              File must be an SVG and max 15 KB.
-            </div>
+            <div class="form-text">Maximum file size: 15KB</div>
           </div>
 
-          <button type="submit" class="btn btn-light w-100 mt-5">Submit</button>
+          <div class="d-grid mt-4">
+            <button type="submit" class="btn btn-light py-2">
+              <i class="bi bi-save me-2"></i>Create Category
+            </button>
+          </div>
         </form>
       </div>
     </main>
 
-    <!-- jQuery (make sure it's loaded before this script) -->
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
+
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-      $(function () {
+      $(document).ready(function () {
         const $form = $(".needs-validation");
+        const $nameInput = $("#name");
         const $iconInput = $("#icon");
-        const $iconError = $("#icon-error");
+        const $colorInput = $("#color");
 
+        // Clear name validation error when user starts typing
+        $nameInput.on("input", function () {
+          const $errorMsg = $(this).nextAll(".error-validation").first();
+          if ($errorMsg.length) {
+            $errorMsg.remove();
+            $(this).removeClass("is-invalid");
+          }
+        });
+
+        // Real-time color value display
+        $colorInput.on("change", function () {
+          $(this).next("span").text(this.value);
+        });
+
+        // File validation
         $iconInput.on("change", function () {
           const file = this.files[0];
-          $iconInput.removeClass("is-invalid");
+          const $errorMsg = $(this).nextAll(".error-validation").first();
+
+          if ($errorMsg.length) $errorMsg.remove();
+          $(this).removeClass("is-invalid");
 
           if (file) {
-            const isSvg = file.type === "image/svg+xml";
-            const isSizeOk = file.size <= 15 * 1024;
+            const isValidType = file.type === "image/svg+xml";
+            const isValidSize = file.size <= 15 * 1024;
 
-            if (!isSvg || !isSizeOk) {
-              $iconInput.addClass("is-invalid");
+            if (!isValidType || !isValidSize) {
+              $(this).addClass("is-invalid");
+              let errorText = "Invalid file: ";
+              if (!isValidType) errorText += "must be SVG";
+              if (!isValidSize)
+                errorText += (isValidType ? "" : " and ") + "max 15KB";
+
+              $(this).after(
+                `<div class="error-validation text-danger mt-1">
+                  <i class="bi bi-exclamation-circle-fill me-1"></i>${errorText}
+                </div>`
+              );
             }
           }
         });
 
+        // Form submission
         $form.on("submit", function (event) {
+          let isValid = true;
+
+          // Validate file if selected
           const file = $iconInput[0].files[0];
-          let fileValid = true;
-
           if (file) {
-            const isSvg = file.type === "image/svg+xml";
-            const isSizeOk = file.size <= 15 * 1024;
+            const isValidType = file.type === "image/svg+xml";
+            const isValidSize = file.size <= 15 * 1024;
 
-            if (!isSvg || !isSizeOk) {
+            if (!isValidType || !isValidSize) {
               $iconInput.addClass("is-invalid");
-              fileValid = false;
-            } else {
-              $iconInput.removeClass("is-invalid");
+              isValid = false;
             }
           }
 
-          if (this.checkValidity() === false || !fileValid) {
+          if (!this.checkValidity() || !isValid) {
             event.preventDefault();
             event.stopPropagation();
           }

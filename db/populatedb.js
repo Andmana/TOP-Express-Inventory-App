@@ -8,17 +8,17 @@ const SQL = `
 DROP TABLE IF EXISTS categories;
 CREATE TABLE IF NOT EXISTS categories (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  name VARCHAR (255),
+  name VARCHAR (255) UNIQUE,
   color VARCHAR(10),
-  icon VARCHAR(255)
+  icon_src VARCHAR(255)
 );
 
-INSERT INTO categories (name, color, icon) VALUES
-  ('Fruits', '#FF6347', 'fruits.svg'),
-  ('Vegetables', '#32CD32', 'vegetables.svg'),
-  ('Dairy', '#FFD700', 'dairy.svg'),
-  ('Bakery', '#FF69B4', 'bakery.svg'),
-  ('Beverages', '#1E90FF', 'beverages.svg');
+INSERT INTO categories (name, color, icon_src) VALUES
+  ('Fruits', '#FF6347', '/icons/fruits.svg'),
+  ('Vegetables', '#32CD32', '/icons/vegetables.svg'),
+  ('Dairy', '#FFD700', NULL),
+  ('Bakery', '#FF69B4', '/icons/bakery.svg'),
+  ('Beverages', '#1E90FF', '/icons/beverages.svg');
 `;
 
 async function main() {

@@ -4,7 +4,7 @@
     href="/products?categories=<%= encodeURIComponent(category.name.toLowerCase() ) %>"
   >
     <img
-      src="<%= encodeURIComponent(category.icon ? `/icons/${category.icon}` : '/icons/default.svg') %>"
+      src="<%= encodeURIComponent(category.icon_src ? category.icon_src : '/icons/default.svg') %>"
       class="icons"
       alt="icon"
     />
