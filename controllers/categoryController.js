@@ -27,4 +27,14 @@ const getCreate = async (req, res, next) => {
   }
 };
 
-export default { getAllCategories, getCreate };
+const postCreate = async (req, res, next) => {
+  try {
+    const { name, color } = req.body;
+    console.log(name, color);
+    res.render("category/create");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export default { getAllCategories, getCreate, postCreate };
