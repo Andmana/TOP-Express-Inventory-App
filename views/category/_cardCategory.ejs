@@ -1,4 +1,7 @@
-<li class="card-category" style="--color: <%= category.color || '#ccc' %>">
+<li
+  class="card-category custom-border"
+  style="--color: <%= category.color || '#ccc' %>"
+>
   <a
     class="p-3 w-100 h-100 d-flex flex-column justify-content-between align-items-center text-decoration-none"
     href="/products?categories=<%= encodeURIComponent(category.name.toLowerCase() ) %>"
