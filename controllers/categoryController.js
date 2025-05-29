@@ -1,5 +1,5 @@
-import { name } from "ejs";
 import categoryRepository from "../repositories/categoryRepository.js";
+import getContrastColor from "../utils/contrastColosr.js";
 
 /**
  * @desc  GET all categories
@@ -10,6 +10,7 @@ const getAllCategories = async (req, res, next) => {
     const categories = await categoryRepository.getAllCategories();
     res.render("category/index", {
       categories,
+      getContrastColor,
     });
   } catch (error) {
     next(new Error("Internal server error"));
@@ -22,7 +23,7 @@ const getAllCategories = async (req, res, next) => {
  */
 const getCreate = async (req, res, next) => {
   try {
-    res.render("category/create", { error: null, color: null });
+    res.render("category/create");
   } catch (error) {
     next(new Error("Internal server error"));
   }
@@ -45,6 +46,7 @@ const postCreate = async (req, res, next) => {
     if (isNameExists)
       return res.render("category/create", {
         error: { name: "Category name is already exists" },
+        name,
         color,
       });
 
@@ -58,7 +60,6 @@ const postCreate = async (req, res, next) => {
     await categoryRepository.createCategory(newEntry);
 
     // Redirect
-    console.log("came here");
     return res.redirect("/categories");
   } catch (error) {
     return next(error);

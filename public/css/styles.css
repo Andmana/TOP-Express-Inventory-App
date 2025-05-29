@@ -105,8 +105,13 @@ li {
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  background-color: var(--color);
+  background-color: var(--bg-color);
+  color: var(--color);
   border-radius: 10px;
+}
+
+.card-category a {
+  color: inherit;
 }
 
 .icons {
@@ -124,4 +129,8 @@ li {
   max-width: 400px;
   margin: auto;
   position: relative;
+}
+
+.error-validation {
+  font-size: 0.875rem;
 }

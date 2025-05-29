@@ -23,7 +23,9 @@
       >
         <% categories.forEach(category => { %>
         <!-- Card Category -->
-        <%- include('./_cardCategory', {category})%> <% }); %>
+        <%- include('./_cardCategory', {category, getContrastColor})%>
+        <!--  -->
+        <% }); %>
       </ul>
     </main>
 

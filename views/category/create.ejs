@@ -27,7 +27,7 @@
             >
             <input
               type="text"
-              class="form-control <%= error?.name ? 'is-invalid' : '' %>"
+              class="form-control <%= typeof error !== 'undefined' && error?.name? 'is-invalid' : '' %>"
               id="name"
               name="name"
               required
@@ -37,10 +37,8 @@
             <div class="invalid-feedback">
               Please provide a valid category name.
             </div>
-            <% if (error?.name) { %>
-            <div class="error-validation text-danger mt-1">
-              <%= error.name %>
-            </div>
+            <% if (typeof error !== 'undefined' && error?.name) { %>
+            <div class="error-validation text-danger"><%= error.name %></div>
             <% } %>
           </div>
 
@@ -55,10 +53,13 @@
                 class="form-control form-control-color p-1"
                 id="color"
                 name="color"
-                value="<%= color || '#ffffff' %>"
+                value="<%= typeof color !== 'undefined' ? color || '#ffffff' : '#ffffff' %>"
                 title="Choose category color"
               />
-              <span class="ms-2"><%= color || '#ffffff' %></span>
+              <span class="ms-2"
+                ><%= typeof color !== 'undefined' ? color || '#ffffff' :
+                '#ffffff' %></span
+              >
             </div>
           </div>
 
@@ -137,7 +138,7 @@
 
               $(this).after(
                 `<div class="error-validation text-danger mt-1">
-                  <i class="bi bi-exclamation-circle-fill me-1"></i>${errorText}
+                 ${errorText}
                 </div>`
               );
             }
