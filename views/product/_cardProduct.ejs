@@ -1,0 +1,31 @@
+<a class="text-decoration-none text-black">
+  <div class="card-product p-0">
+    <div>
+      <img
+        src="<%= encodeURIComponent(product.icon_src || '/icons/default.svg') %>"
+        alt="Icon"
+        class="icons"
+      />
+      <div class="card-product-name fw-bold w-100">
+        <span class="text-truncate"><%= product.name %></span>
+        <span class="">$ <%= product.price %></span>
+      </div>
+      <p class="m-0 w-100 text-start text-muted">
+        Brand : <%= product.brand %>
+      </p>
+      <p class="m-0 w-100 text-start text-muted">
+        Quantity : <%= product.quantity %>
+      </p>
+    </div>
+    <p
+      class="m-0 w-100 text-center product-tag"
+      style="
+        --bg-color: <%= product.category_color %>;
+        --color: <%= getContrastColor(product.category_color) %>;
+        max-width: 100%;
+      "
+    >
+      <%= product.category_name %>
+    </p>
+  </div>
+</a>

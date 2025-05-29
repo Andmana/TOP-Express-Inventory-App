@@ -18,7 +18,18 @@
       <div class="custom-container">
         <!-- sidebar filter -->
         <%- include('./_sidebar', {categories, getContrastColor}) %>
-        <div class=""></div>
+        <!--  -->
+
+        <!-- Product List -->
+        <div class="p-3 w-100">
+          <ul class="d-flex justify-content-evenly gap-2 flex-wrap">
+            <% products.forEach(product => { %>
+            <li class="mb-2">
+              <%- include('./_cardProduct', {product, getContrastColor}) %>
+            </li>
+            <%}); %>
+          </ul>
+        </div>
       </div>
     </main>
 

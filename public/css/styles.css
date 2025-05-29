@@ -158,3 +158,44 @@ li {
   color: var(--color);
   border-radius: 20px !important;
 }
+
+.card-product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 200px;
+  height: 240px;
+  overflow: hidden;
+  border: 1px solid gray;
+  border-radius: 20px;
+}
+
+.card-product > div {
+  flex-grow: 1;
+  width: 100%;
+  padding: 0.875rem;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.card-product-name {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+}
+
+.card-product > div > p {
+  font-size: 0.875rem;
+}
+
+.product-tag {
+  background-color: var(--bg-color);
+  color: var(--color);
+  font-weight: bold;
+}
