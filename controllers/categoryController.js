@@ -28,36 +28,6 @@ const getCreate = async (req, res, next) => {
   }
 };
 
-// const postCreate = async (req, res, next) => {
-//   const cleanName = req.body.name.trim();
-
-//   const filepath = "/icons/uploads/categories/";
-
-//   const newEntry = {
-//     name: cleanName,
-//     color: req.body.color,
-//     icon: req.file
-//       ? filepath + name.replaceAll(" ", "_") + ".svg"
-//       : "/icons/default.svg",
-//   };
-
-//   try {
-//     // Validate exists name
-//     const isNameExists = await categoryRepository.isNameExists(cleanName);
-//     if (isNameExists) {
-//       const err = new Error();
-//       err.name = "Name Already exists";
-//       throw err;
-//     }
-//     console.log(req.body);
-//     if (req.file) console.log(req.file.filename);
-
-//     res.render("category/");
-//   } catch (error) {
-//     res.render("category/create", { error });
-//   }
-// };
-
 const postCreate = async (req, res, next) => {
   const { name, color } = req.body;
 
@@ -80,8 +50,7 @@ const postCreate = async (req, res, next) => {
 
     let icon_src = "/icons/default.svg";
     if (req.file) {
-      icon_src =
-        "/icons/uploads/categories/" + name.replaceAll(" ", "_") + ".svg";
+      icon_src = `/uploads/${req.file.filename}`;
     }
 
     // Db query
