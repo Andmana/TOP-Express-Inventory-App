@@ -18,21 +18,25 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" id="home" aria-current="page" href="/">Home</a>
+          <a class="nav-link ms-1" id="home" aria-current="page" href="/"
+            >Home</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="products" href="/products">Products</a>
+          <a class="nav-link ms-1" id="products" href="/products">Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="categories" href="/categories">Categories</a>
+          <a class="nav-link ms-1" id="categories" href="/categories"
+            >Categories</a
+          >
         </li>
       </ul>
       <form class="d-flex" role="search">
         <input
           class="form-control me-2 bg-white"
           type="search"
-          placeholder="Search"
-          aria-label="Search"
+          placeholder="Search product"
+          aria-label="Search product"
         />
         <button class="btn btn-light" type="submit">Search</button>
       </form>
@@ -42,7 +46,8 @@
 
 <script>
   const activeNav = "<%= activeNav %>";
-  if (!activeNav === "") {
+  if (!(activeNav === "")) {
+    console.log(activeNav);
     // Add 'active' class to the nav-link with the ID matching activeNav
     $(`#${activeNav}`).addClass("active");
     // Set aria-current="page" for accessibility on the active nav-link

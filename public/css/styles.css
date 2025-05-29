@@ -22,17 +22,17 @@ footer.style-footer {
   gap: 1ch;
 }
 
-nav.style-nav,
+.style-nav,
 .main-content {
   padding-right: 1rem !important;
   padding-left: 1rem !important;
 }
 
 @media screen and (min-width: 576px) {
-  nav.style-nav,
+  .style-nav,
   .main-content {
-    padding-right: clamp(100px, 15%, 300px) !important;
-    padding-left: clamp(100px, 15%, 300px) !important;
+    padding-right: 120px !important;
+    padding-left: 120px !important;
   }
 }
 
