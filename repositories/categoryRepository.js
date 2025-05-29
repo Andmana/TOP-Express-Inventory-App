@@ -1,4 +1,3 @@
-import { query } from "express-validator";
 import pool from "../db/pool.js";
 
 async function getAllCategories() {

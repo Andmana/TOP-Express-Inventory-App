@@ -1,7 +1,8 @@
-const PRODUCTS = [{ name: "ice cream" }, { name: "fire" }];
+import productRepository from "../repositories/productRepository.js";
 
 const getAllProducts = async (req, res, next) => {
-  res.render("product/index", { products: PRODUCTS });
+  const products = await productRepository.getAllProducts();
+  res.render("product/index", { products });
 };
 
 export default { getAllProducts };
