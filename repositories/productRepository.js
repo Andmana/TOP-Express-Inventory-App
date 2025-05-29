@@ -1,6 +1,10 @@
 import pool from "../db/pool.js";
 
-async function getAllProducts() {
+async function getAllProducts(
+  sort = "name",
+  order = "asc",
+  categoryQueries = []
+) {
   const { rows } = await pool.query(`
     SELECT 
       p.id AS id,
@@ -16,6 +20,12 @@ async function getAllProducts() {
       c.icon_src AS category_icon
     FROM products p
     JOIN categories c ON p.category_id = c.id
+    ${
+      categoryQueries.length > 0
+        ? `WHERE c.id IN (${categoryQueries.join(",")})`
+        : ""
+    }
+    ORDER BY c.${sort} ${order}  
   `);
 
   return rows;
