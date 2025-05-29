@@ -1,5 +1,5 @@
 import categoryRepository from "../repositories/categoryRepository.js";
-import getContrastColor from "../utils/contrastColosr.js";
+import getContrastColor from "../utils/contrastColors.js";
 
 /**
  * @desc  GET all categories
@@ -29,6 +29,10 @@ const getCreate = async (req, res, next) => {
   }
 };
 
+/**
+ * @desc  POST create new category
+ * @route POST /categories/create
+ */
 const postCreate = async (req, res, next) => {
   const { name, color } = req.body;
 
