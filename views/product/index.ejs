@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Dependencies  header -->
+    <%- include('../partials/_head') %>
+    <title>FooDrink | Products</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <%- include("../partials/_navbar", { activeNav: 'home' }) %>
+
+    <!-- Main -->
+    <main>
+      <% products.forEach(product => { %>
+      <div><%= product.name %></div>
+      <% }); %>
+    </main>
+
+    <!-- Footer -->
+    <%- include("../partials/_footer") %>
+  </body>
+</html>

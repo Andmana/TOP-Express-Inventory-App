@@ -10,6 +10,7 @@ import notFondMiddleware from "./middlewares/notFoundMiddleware.js";
 
 import homeRouter from "./routes/homeRoute.js";
 import categoryRouter from "./routes/categoryRoute.js";
+import productRouter from "./routes/productRoute.js";
 
 const PORT = process.env.PORT || 8000;
 const app = express();
@@ -32,6 +33,7 @@ app.use(errorMiddleware); // Errorhandle
 // Routes
 app.use("/", homeRouter);
 app.use("/categories", categoryRouter); // Categories Routes
+app.use("/products", productRouter); // Products Routes
 
 // Error handle
 app.use(notFondMiddleware); // error route not found
