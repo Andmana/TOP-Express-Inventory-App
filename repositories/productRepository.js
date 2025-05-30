@@ -3,7 +3,8 @@ import pool from "../db/pool.js";
 async function getAllProducts(
   sort = "name",
   order = "asc",
-  categoryQueries = []
+  categoryQueries = [],
+  name = ""
 ) {
   const { rows } = await pool.query(`
     SELECT 
@@ -25,6 +26,8 @@ async function getAllProducts(
         ? `WHERE c.id IN (${categoryQueries.join(",")})`
         : ""
     }
+    ${name !== "" ? `AND LOWER(p.name) LIKE  '%${name.toLowerCase()}%'` : ""}
+
     ORDER BY c.${sort} ${order}  
   `);
 

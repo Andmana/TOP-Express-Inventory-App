@@ -10,6 +10,7 @@ const getAllProducts = async (req, res, next) => {
   // Get order and sort values
   const order = req.query.order || "asc"; // 'asc' or 'desc'
   const sort = req.query.sort || "name"; // 'name' or 'price'
+  const name = req.query.name || "";
 
   // Handle categories: parse from comma-separated string to array
   let categoryQueries = [];
@@ -23,7 +24,8 @@ const getAllProducts = async (req, res, next) => {
   const products = await productRepository.getAllProducts(
     sort,
     order,
-    categoryQueries
+    categoryQueries,
+    name
   );
   const categories = await categoryRepository.getAllCategories();
   res.render("product/index", { products, categories, getContrastColor });

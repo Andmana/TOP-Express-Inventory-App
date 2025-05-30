@@ -101,9 +101,11 @@
     // Get selected order and sort
     const order = $form.find('input[name="order"]:checked').val();
     const sort = $form.find('input[name="sort"]:checked').val();
+    const name = $("#name-query");
 
     if (order) params.set("order", order);
     if (sort) params.set("sort", sort);
+    if (name && name.val() != "") params.set("name", name.val());
 
     // Get selected categories
     const categories = [];

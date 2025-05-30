@@ -31,12 +31,14 @@
           >
         </li>
       </ul>
-      <form class="d-flex" role="search">
+      <form class="d-flex" role="search" action="/products" method="get">
         <input
           class="form-control me-2 bg-white"
           type="search"
           placeholder="Search product"
           aria-label="Search product"
+          id="name-query"
+          name="name"
         />
         <button class="btn btn-light" type="submit">Search</button>
       </form>
