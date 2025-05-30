@@ -36,24 +36,24 @@ CREATE TABLE products (
 
 INSERT INTO products (name, description, price, category_id, quantity, brand, icon_src) VALUES
 -- Fruits (category_id = 1)
-('Red Apples', 'Fresh and crispy red apples.', 2.99, 1, 50, 'NatureFarms', '/icons/default.svg'),
-('Bananas', 'Sweet ripe bananas.', 1.49, 1, 100, 'TropicalFresh', '/icons/default.svg'),
+('Red Apples', 'Fresh and crispy red apples.', 2.99, 1, 50, 'NatureFarms', '/icons/apple.svg'),
+('Bananas', 'Sweet ripe bananas.', 1.49, 1, 100, 'TropicalFresh', '/icons/banana.svg'),
 
 -- Vegetables (category_id = 2)
-('Carrots', 'Organic orange carrots.', 0.99, 2, 80, 'GreenGrow', '/icons/default.svg'),
-('Spinach', 'Fresh baby spinach.', 1.99, 2, 60, 'LeafyLand', '/icons/default.svg'),
+('Carrots', 'Organic orange carrots.', 0.99, 2, 80, 'GreenGrow', '/icons/carrot.svg'),
+('Spinach', 'Fresh baby spinach.', 1.99, 2, 60, 'LeafyLand', '/icons/spinach.svg'),
 
 -- Dairy (category_id = 3)
-('Whole Milk', 'Creamy whole milk, 1L.', 1.89, 3, 200, 'default', NULL),
-('Cheddar Cheese', 'Aged cheddar block, 200g.', 3.49, 3, 40, 'default', NULL),
+('Whole Milk', 'Creamy whole milk, 1L.', 1.89, 3, 200, 'default', 'icons/milk.svg'),
+('Cheddar Cheese', 'Aged cheddar block, 200g.', 3.49, 3, 40, 'default', 'icons/cheese.svg'),
 
 -- Bakery (category_id = 4)
-('Sourdough Bread', 'Handmade sourdough loaf.', 2.49, 4, 30, 'BakersDaily', '/icons/default.svg'),
-('Croissant', 'Buttery croissant pastry.', 1.29, 4, 60, 'ParisBake', '/icons/default.svg'),
+('Sourdough Bread', 'Handmade sourdough loaf.', 2.49, 4, 30, 'BakersDaily', '/icons/bread.svg'),
+('Croissant', 'Buttery croissant pastry.', 1.29, 4, 60, 'ParisBake', '/icons/croissant.svg'),
 
 -- Beverages (category_id = 5)
-('Orange Juice', 'Freshly squeezed, 500ml.', 2.59, 5, 70, 'JuicyJoy', '/icons/default.svg'),
-('Coffee Beans', 'Medium roast Arabica beans.', 7.99, 5, 25, 'BeanBrew', '/icons/default.svg');
+('Orange Juice', 'Freshly squeezed, 500ml.', 2.59, 5, 70, 'JuicyJoy', '/icons/juice.svg'),
+('Coffee Beans', 'Medium roast Arabica beans.', 7.99, 5, 25, 'BeanBrew', '/icons/coffe.svg');
 
 
 `;
