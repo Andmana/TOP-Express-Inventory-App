@@ -1,11 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <!-- Dependencies  header -->
+    <%- include('../partials/_head') %>
+    <title><%= product.name %></title>
   </head>
   <body>
-    <%= product.name %>
+    <!-- Navbar -->
+    <%- include("../partials/_navbar",{ activeNav: ''}) %>
+
+    <main class="flex-grow-1 main-content d-flex flex-column">
+      <div class="mt-5 mb-4 d-flex align-items-center gap-4">
+        <a class="inline btn btn-sm" href="/products" 
+          style="background-color: rgba(var(--rgb-2), 0.3);"
+        > 
+          &lt;&lt; Back to Products
+        </a>
+      </div>
+
+      <div class="detail-product-container">
+        <div class="flex justify-content-center align-content-center  p-3">
+          <img class="product-image" src="<%= product.icon_src %>" alt="Product">
+        </div>
+        <div class="w-100 p-3 d-flex flex-column gap-3">
+          <div class=" d-flex align-items-end gap-3">
+            <h1 class="flex-grow-1 m-0"><%= product.name %></h1>
+            <p class="fs-2 fw-medium m-0">$<%= product.price %></p>
+          </div>
+          <p
+            class="m-0 text-center product-tag  py-1 px-2 rounded-5 fs-5"
+            style="
+                --bg-color: <%= product.category_color %>;
+                --color: <%= getContrastColor(product.category_color) %>;
+                width: fit-content;
+                "
+            >
+            <%= product.category_name %>
+          </p>
+          <p class="m-0 h3 ">
+              Brand : <%= product.Brand || "-" %>
+          </p>
+
+          <p class="m-0 fw-medium"><%= product.description %></p>
+          <p class="m-0 h5">Quantity :  <%= product.quantity %></p>
+
+          <div class="pt-4 d-flex gap-3 align-content-center justify-content-end">
+            <a class="btn btn-light px-3" href="/products/edit/<%= product.id %>">Edit</a>
+            <button class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+
+      </div>
   </body>
 </html>

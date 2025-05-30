@@ -31,6 +31,14 @@ footer.style-footer {
 @media screen and (min-width: 576px) {
   .style-nav,
   .main-content {
+    padding-right: 10% !important;
+    padding-left: 10% !important;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .style-nav,
+  .main-content {
     padding-right: 120px !important;
     padding-left: 120px !important;
   }
@@ -198,4 +206,20 @@ li {
   background-color: var(--bg-color);
   color: var(--color);
   font-weight: bold;
+}
+
+.detail-product-container {
+  padding: 1rem;
+  border: 0.5px solid grey;
+  border-radius: 30px;
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+}
+
+.product-image {
+  width: 30vw;
+  max-width: 300px;
+  height: auto;
 }

@@ -1,7 +1,6 @@
 import productRepository from "../repositories/productRepository.js";
 import categoryRepository from "../repositories/categoryRepository.js";
 import getContrastColor from "../utils/contrastColors.js";
-import { render } from "ejs";
 
 /**
  * @desc  GET all products with optional filtering and sorting
@@ -57,7 +56,7 @@ const getProductById = async (req, res, next) => {
     }
 
     // Render the view
-    res.render("product/detail", { product });
+    res.render("product/detail", { product, getContrastColor });
   } catch (error) {
     return next(new Error(error.message || "Internal server error"));
   }
