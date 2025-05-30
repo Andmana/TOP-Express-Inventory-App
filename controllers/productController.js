@@ -1,6 +1,7 @@
 import productRepository from "../repositories/productRepository.js";
 import categoryRepository from "../repositories/categoryRepository.js";
 import getContrastColor from "../utils/contrastColors.js";
+import { render } from "ejs";
 
 /**
  * @desc  GET all products with optional filtering and sorting
@@ -38,4 +39,28 @@ const getAllProducts = async (req, res, next) => {
   }
 };
 
-export default { getAllProducts };
+/**
+ * @desc  GET products by id product
+ * @route GET /products/:id
+ */
+
+const getProductById = async (req, res, next) => {
+  const productId = req.params.id;
+
+  try {
+    // Fetch data
+    const product = await productRepository.getProductById(productId);
+    if (!product) {
+      const err = new Error("Product not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    // Render the view
+    res.render("product/detail", { product });
+  } catch (error) {
+    return next(new Error(error.message || "Internal server error"));
+  }
+};
+
+export default { getAllProducts, getProductById };
