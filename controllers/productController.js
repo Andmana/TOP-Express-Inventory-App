@@ -3,32 +3,39 @@ import categoryRepository from "../repositories/categoryRepository.js";
 import getContrastColor from "../utils/contrastColors.js";
 
 /**
- * @desc  GET all products
+ * @desc  GET all products with optional filtering and sorting
  * @route GET /products
  */
 const getAllProducts = async (req, res, next) => {
-  // Get order and sort values
-  const order = req.query.order || "asc"; // 'asc' or 'desc'
-  const sort = req.query.sort || "name"; // 'name' or 'price'
-  const name = req.query.name || "";
+  try {
+    const {
+      order = "asc",
+      sort = "name",
+      name = "",
+      categories: categoriesQuery = "",
+    } = req.query;
 
-  // Handle categories: parse from comma-separated string to array
-  let categoryQueries = [];
-  if (req.query.categories) {
-    categoryQueries = req.query.categories
+    // Convert comma-separated category IDs into an array of numbers
+    const categoryIds = categoriesQuery
       .split(",")
       .map((id) => parseInt(id, 10))
-      .filter((id) => !isNaN(id)); // ensure valid numbers
-  }
+      .filter(Number.isFinite);
 
-  const products = await productRepository.getAllProducts(
-    sort,
-    order,
-    categoryQueries,
-    name
-  );
-  const categories = await categoryRepository.getAllCategories();
-  res.render("product/index", { products, categories, getContrastColor });
+    // Fetch data
+    const [products, categories] = await Promise.all([
+      productRepository.getAllProducts(sort, order, categoryIds, name),
+      categoryRepository.getAllCategories(),
+    ]);
+
+    // Render the view
+    res.render("product/index", {
+      products,
+      categories,
+      getContrastColor,
+    });
+  } catch (error) {
+    next(new Error(error.message || "Internal server error"));
+  }
 };
 
 export default { getAllProducts };
