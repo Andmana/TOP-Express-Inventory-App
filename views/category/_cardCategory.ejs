@@ -7,7 +7,7 @@
 >
   <a
     class="p-3 w-100 h-100 d-flex flex-column justify-content-between align-items-center text-decoration-none"
-    href="/products?categories=<%= encodeURIComponent(category.name.toLowerCase() ) %>"
+    href="/products?categories=<%= encodeURIComponent(category.id ) %>"
   >
     <img
       src="<%= encodeURIComponent(category.icon_src ? category.icon_src : '/icons/default.svg') %>"
