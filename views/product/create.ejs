@@ -53,7 +53,7 @@
             <label for="category_select" class="form-label">Category : </label>
             <select
               class="form-select form-select mb-3 <%= typeof error !== 'undefined' && error?.category_id? 'is-invalid' : '' %>"
-              aria-label="Large select example"
+              name="category_id"
               required
             >
               <% categories.forEach(category => { %>
@@ -101,7 +101,7 @@
           <div class="mb-4">
             <label for="brand" class="form-label fw-semibold">Brand : </label>
             <input
-              type="number"
+              type="text"
               class="form-control <%= typeof error !== 'undefined' && error?.brand? 'is-invalid' : '' %>"
               id="brand"
               name="brand"

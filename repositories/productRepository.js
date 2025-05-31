@@ -56,4 +56,35 @@ async function getProductById(id) {
   return rows[0] || null;
 }
 
-export default { getAllProducts, getProductById };
+async function createProduct(data) {
+  await pool.query(
+    "INSERT INTO products (name, category_id, description, price, quantity, brand, icon_src) values($1, $2, $3, $4, $5, $6, $7)",
+    [
+      data.name,
+      data.category_id,
+      data.description,
+      data.price,
+      data.quantity,
+      data.brand,
+      data.icon_src,
+    ]
+  );
+}
+
+async function isNameExists(name, id = 0) {
+  if (id === 0) {
+    const { rows } = await pool.query(
+      "SELECT 1 FROM products WHERE LOWER(name) = LOWER($1)",
+      [name]
+    );
+    return rows.length;
+  } else {
+    const { rows } = await pool.query(
+      "SELECT 1 FROM products WHERE LOWER(name) = LOWER($1) AND id != $2",
+      [name, id]
+    );
+    return rows.length;
+  }
+}
+
+export default { getAllProducts, getProductById, createProduct, isNameExists };

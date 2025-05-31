@@ -75,4 +75,39 @@ const getCreate = async (req, res, next) => {
   }
 };
 
-export default { getAllProducts, getProductById, getCreate };
+const postCreate = async (req, res, next) => {
+  const { name, category_id, price, quantity, brand, description } = req.body;
+  try {
+    const categories = await categoryRepository.getAllCategories();
+    const isNameExists = await productRepository.isNameExists(name.trim());
+    if (isNameExists) {
+      return res.render("product/create", {
+        error: { name: "Product name is already exists" },
+        categories,
+      });
+    }
+
+    let icon_src = "/icons/default.svg";
+    if (req.file) {
+      icon_src = `/uploads/${req.file.filename}`;
+    }
+
+    // Db query
+    const newEntry = {
+      name: name.trim(),
+      category_id,
+      description,
+      quantity,
+      price,
+      brand,
+      icon_src,
+    };
+    await productRepository.createProduct(newEntry);
+    // Redirect
+    return res.redirect("/products");
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export default { getAllProducts, getProductById, getCreate, postCreate };
