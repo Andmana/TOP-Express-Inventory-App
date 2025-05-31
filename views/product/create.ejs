@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/_head') %>
+    <title>FooDrink | Create Product</title>
+  </head>
+  <body>
+    <%- include("../partials/_navbar", { activeNav : 'categories' }) %>
+
+    <main class="flex-grow-1 main-content">
+      <div class="mt-5 mb-4 d-flex align-items-center gap-4">
+        <a
+          href="/categories"
+          class="btn btn-sm custom-border"
+          style="background-color: var(--color-theme-1)"
+          >Go back</a
+        >
+        <h1 class="inline">Create Product</h1>
+      </div>
+
+      <div class="w-100 px-3 py-3 px-lg-5 py-lg-4 custom-border bg-theme-1">
+        <form
+          action="/products/create"
+          method="post"
+          enctype="multipart/form-data"
+          class="needs-validation"
+          novalidate
+        >
+          <!-- Product Name -->
+          <div class="mb-4">
+            <label for="name" class="form-label fw-semibold"
+              >Product Name :
+            </label>
+            <input
+              type="text"
+              class="form-control <%= typeof error !== 'undefined' && error?.name? 'is-invalid' : '' %>"
+              id="name"
+              name="name"
+              required
+              value="<%= typeof name !== 'undefined' ? name : '' %>"
+            />
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">
+              Please provide a valid product name.
+            </div>
+            <% if (typeof error !== 'undefined' && error?.name) { %>
+            <div class="error-validation text-danger"><%= error.name %></div>
+            <% } %>
+          </div>
+
+          <!-- Select Category  -->
+          <div class="mb-3">
+            <label for="category_select" class="form-label">Category : </label>
+            <select
+              class="form-select form-select mb-3 <%= typeof error !== 'undefined' && error?.category_id? 'is-invalid' : '' %>"
+              aria-label="Large select example"
+              required
+            >
+              <% categories.forEach(category => { %>
+              <!--  -->
+              <option value="<%= category.id %>"><%= category.name %></option>
+              <% }); %>
+            </select>
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please select category.</div>
+          </div>
+
+          <!-- Input price -->
+          <div class="mb-4">
+            <label for="price" class="form-label fw-semibold">Price : </label>
+            <input
+              type="number"
+              class="form-control <%= typeof error !== 'undefined' && error?.price? 'is-invalid' : '' %>"
+              id="price"
+              name="price"
+              required
+              value="<%= typeof price !== 'undefined' ? price : '' %>"
+            />
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please provide a valid price.</div>
+          </div>
+
+          <!-- Input quantity -->
+          <div class="mb-4">
+            <label for="quantity" class="form-label fw-semibold"
+              >Quantity :
+            </label>
+            <input
+              type="number"
+              class="form-control <%= typeof error !== 'undefined' && error?.quantity? 'is-invalid' : '' %>"
+              id="quantity"
+              name="quantity"
+              required
+              value="<%= typeof quantity !== 'undefined' ? quantity : '' %>"
+            />
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please provide a valid quantity.</div>
+          </div>
+
+          <!-- Input Brand -->
+          <div class="mb-4">
+            <label for="brand" class="form-label fw-semibold">Brand : </label>
+            <input
+              type="number"
+              class="form-control <%= typeof error !== 'undefined' && error?.brand? 'is-invalid' : '' %>"
+              id="brand"
+              name="brand"
+              required
+              value="<%= typeof brand !== 'undefined' ? brand : '' %>"
+            />
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please provide a valid brand.</div>
+          </div>
+
+          <!-- Input Description -->
+          <div class="mb-4">
+            <label for="description" class="form-label fw-semibold"
+              >Description :
+            </label>
+            <textarea
+              type="number"
+              class="form-control"
+              id="description"
+              name="description"
+              value="<%= typeof description !== 'undefined' ? description : '' %>"
+            ></textarea>
+          </div>
+
+          <!-- Icon Upload -->
+          <div class="mb-4">
+            <label for="icon" class="form-label fw-semibold"
+              >Icon (SVG only) :
+            </label>
+            <input
+              type="file"
+              class="form-control"
+              id="icon"
+              name="icon"
+              accept=".svg"
+            />
+            <div class="form-text">Maximum file size: 15KB</div>
+          </div>
+
+          <div class="d-grid mt-4">
+            <button type="submit" class="btn btn-light py-2">
+              <i class="bi bi-save me-2"></i>Create Product
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        const $form = $(".needs-validation");
+        const $nameInput = $("#name");
+        const $iconInput = $("#icon");
+
+        // Clear name validation error when user starts typing
+        $nameInput.on("input", function () {
+          const $errorMsg = $(this).nextAll(".error-validation").first();
+          if ($errorMsg.length) {
+            $errorMsg.remove();
+            $(this).removeClass("is-invalid");
+          }
+        });
+
+        // File validation
+        $iconInput.on("change", function () {
+          const file = this.files[0];
+          const $errorMsg = $(this).nextAll(".error-validation").first();
+
+          if ($errorMsg.length) $errorMsg.remove();
+          $(this).removeClass("is-invalid");
+
+          if (file) {
+            const isValidType = file.type === "image/svg+xml";
+            const isValidSize = file.size <= 15 * 1024;
+
+            if (!isValidType || !isValidSize) {
+              $(this).addClass("is-invalid");
+              let errorText = "Invalid file: ";
+              if (!isValidType) errorText += "must be SVG";
+              if (!isValidSize)
+                errorText += (isValidType ? "" : " and ") + "max 15KB";
+
+              $(this).after(
+                `<div class="error-validation text-danger mt-1">
+                 ${errorText}
+                </div>`
+              );
+            }
+          }
+        });
+
+        // Form submission
+        $form.on("submit", function (event) {
+          let isValid = true;
+
+          // Validate file if selected
+          const file = $iconInput[0].files[0];
+          if (file) {
+            const isValidType = file.type === "image/svg+xml";
+            const isValidSize = file.size <= 15 * 1024;
+
+            if (!isValidType || !isValidSize) {
+              $iconInput.addClass("is-invalid");
+              isValid = false;
+            }
+          }
+
+          if (!this.checkValidity() || !isValid) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          $(this).addClass("was-validated");
+        });
+      });
+    </script>
+  </body>
+</html>

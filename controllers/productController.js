@@ -62,4 +62,17 @@ const getProductById = async (req, res, next) => {
   }
 };
 
-export default { getAllProducts, getProductById };
+/**
+ * @desc  GET  create products form view
+ * @route GET /products/create
+ */
+const getCreate = async (req, res, next) => {
+  try {
+    const categories = await categoryRepository.getAllCategories();
+    res.render("product/create", { categories });
+  } catch (error) {
+    next(new Error("Internal server error"));
+  }
+};
+
+export default { getAllProducts, getProductById, getCreate };
