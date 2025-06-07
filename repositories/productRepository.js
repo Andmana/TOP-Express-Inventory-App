@@ -95,10 +95,82 @@ async function deleteProductById(id) {
   return rowCount > 0; // returns true if a row was deleted, false otherwise
 }
 
+async function updateProduct(data) {
+  const {
+    id,
+    name,
+    price,
+    quantity,
+    description,
+    brand,
+    category_id,
+    icon_src,
+  } = data;
+
+  const fields = [];
+  const values = [];
+  let idx = 1;
+  console.log(
+    id,
+    name,
+    price,
+    quantity,
+    description,
+    brand,
+    category_id,
+    icon_src
+  );
+
+  if (name !== undefined) {
+    fields.push(`name = $${idx++}`);
+    values.push(name);
+  }
+  if (category_id !== undefined) {
+    fields.push(`category_id = $${idx++}`);
+    values.push(category_id);
+  }
+  if (price !== undefined) {
+    fields.push(`price = $${idx++}`);
+    values.push(price);
+  }
+  if (quantity !== undefined) {
+    fields.push(`quantity = $${idx++}`);
+    values.push(quantity);
+  }
+  if (description !== undefined) {
+    fields.push(`description = $${idx++}`);
+    values.push(description);
+  }
+  if (brand !== undefined) {
+    fields.push(`brand = $${idx++}`);
+    values.push(brand);
+  }
+  if (icon_src !== undefined) {
+    fields.push(`icon_src = $${idx++}`);
+    values.push(icon_src);
+  }
+
+  if (fields.length === 0) {
+    throw new Error("No fields to update.");
+  }
+
+  values.push(id); // Final param is for WHERE clause
+
+  const query = `
+    UPDATE products
+    SET ${fields.join(", ")}
+    WHERE id = $${idx}
+  `;
+
+  const { rowCount } = await pool.query(query, values);
+  return rowCount; // 0 if nothing was updated, 1 if successful
+}
+
 export default {
   getAllProducts,
   getProductById,
   createProduct,
   isNameExists,
   deleteProductById,
+  updateProduct,
 };

@@ -12,6 +12,11 @@ router.post(
   productController.postCreate
 );
 router.get("/edit/:id", productController.getEditProduct);
+router.post(
+  "/edit/",
+  uploadMiddleware.single("icon"),
+  productController.postEditProduct
+);
 router.post("/delete", productController.deleteProductById);
 router.get("/:id", productController.getProductById);
 

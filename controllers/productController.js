@@ -74,6 +74,10 @@ const getCreate = async (req, res, next) => {
   }
 };
 
+/**
+ * @desc  post create product
+ * @route post /products/create
+ */
 const postCreate = async (req, res, next) => {
   const { name, category_id, price, quantity, brand, description } = req.body;
   try {
@@ -166,6 +170,54 @@ const getEditProduct = async (req, res, next) => {
   }
 };
 
+/**
+ * @desc  post create product
+ * @route post /products/create
+ */
+const postEditProduct = async (req, res, next) => {
+  const { name, category_id, price, quantity, brand, description, id } =
+    req.body;
+  try {
+    const categories = await categoryRepository.getAllCategories();
+    const isNameExists = await productRepository.isNameExists(name.trim(), id);
+    if (isNameExists) {
+      return res.render("product/edit", {
+        error: { name: "Product name is already exists" },
+        categories,
+      });
+    }
+
+    const product = await productRepository.getProductById(id);
+    if (!product) {
+      const err = new Error("Product not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    let icon_src = undefined;
+    if (req.file) {
+      icon_src = `/uploads/${req.file.filename}`;
+    }
+
+    // Db query
+    const data = {
+      name: name.trim(),
+      category_id,
+      description,
+      quantity,
+      price,
+      brand,
+      icon_src,
+      id,
+    };
+    await productRepository.updateProduct(data);
+    // Redirect
+    return res.redirect("/products/" + id);
+  } catch (error) {
+    return next(error);
+  }
+};
+
 export default {
   getAllProducts,
   getProductById,
@@ -173,4 +225,5 @@ export default {
   postCreate,
   deleteProductById,
   getEditProduct,
+  postEditProduct,
 };

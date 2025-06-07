@@ -21,12 +21,15 @@
 
         <div class="w-100 p-3 d-flex flex-column gap-3">
           <form
-            action="/products/edit/<%= product.id %>"
+            action="/products/edit"
             method="post"
             enctype="multipart/form-data"
             class="needs-validation"
             novalidate
           >
+            <!-- Product  id -->
+            <input type="text" name="id" id="id" value="<%= product.id %>" hidden>
+            
             <!-- Product Name -->
             <div class="mb-3">
               <label for="name" class="form-label fw-semibold">Product Name:</label>
@@ -95,11 +98,11 @@
 
             <!-- Brand -->
             <div class="mb-3">
-              <label for="Brand" class="form-label fw-semibold">Brand:</label>
+              <label for="brand" class="form-label fw-semibold">Brand:</label>
               <input
                 type="text"
-                id="Brand"
-                name="Brand"
+                id="brand"
+                name="brand"
                 value="<%= product.Brand %>"
                 class="form-control <%= typeof error !== 'undefined' && error?.Brand ? 'is-invalid' : '' %>"
               />
@@ -119,26 +122,14 @@
               <div class="invalid-feedback">Please provide a description.</div>
             </div>
 
-            <!-- Category Color -->
-            <div class="mb-3">
-              <label for="category_color" class="form-label fw-semibold">Category Color:</label>
-              <input
-                type="text"
-                id="category_color"
-                name="category_color"
-                value="<%= product.category_color %>"
-                class="form-control"
-              />
-            </div>
-
             <!-- Icon Upload -->
             <div class="mb-3">
               <label for="icon_src" class="form-label fw-semibold">Icon (SVG only):</label>
               <input
                 type="file"
-                id="icon_src"
-                name="icon_src"
                 class="form-control"
+                id="icon"
+                name="icon"
                 accept=".svg"
               />
               <div class="form-text">Maximum file size: 15KB</div>
