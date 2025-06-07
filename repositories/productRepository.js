@@ -28,7 +28,7 @@ async function getAllProducts(
     }
     ${name !== "" ? `AND LOWER(p.name) LIKE  '%${name.toLowerCase()}%'` : ""}
 
-    ORDER BY c.${sort} ${order}  
+    ORDER BY p.${sort} ${order}  
   `);
 
   return rows;
