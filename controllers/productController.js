@@ -144,12 +144,15 @@ const deleteProductById = async (req, res, next) => {
  * @route GET /products/edit/:id
  */
 const getEditProduct = async (req, res, next) => {
-  console.log("goes here");
   const productId = req.params.id;
 
   try {
     // Fetch data
-    const product = await productRepository.getProductById(productId);
+    const [product, categories] = await Promise.all([
+      productRepository.getProductById(productId),
+      categoryRepository.getAllCategories(),
+    ]);
+
     if (!product) {
       const err = new Error("Product not found");
       err.status = 404;
@@ -157,7 +160,7 @@ const getEditProduct = async (req, res, next) => {
     }
 
     // Render the view
-    res.render("product/edit", { product, getContrastColor });
+    res.render("product/edit", { product, categories });
   } catch (error) {
     return next(new Error(error.message || "Internal server error"));
   }
