@@ -11,7 +11,8 @@ router.post(
   uploadMiddleware.single("icon"),
   productController.postCreate
 );
-router.get("/:id", productController.getProductById);
+router.get("/edit/:id", productController.getEditProduct);
 router.post("/delete", productController.deleteProductById);
+router.get("/:id", productController.getProductById);
 
 export default router;

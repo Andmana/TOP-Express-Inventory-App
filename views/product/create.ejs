@@ -75,6 +75,7 @@
               name="price"
               required
               value="<%= typeof price !== 'undefined' ? price : '' %>"
+              min="0"
             />
             <div class="valid-feedback">Looks good!</div>
             <div class="invalid-feedback">Please provide a valid price.</div>
@@ -92,6 +93,7 @@
               name="quantity"
               required
               value="<%= typeof quantity !== 'undefined' ? quantity : '' %>"
+              min="0"
             />
             <div class="valid-feedback">Looks good!</div>
             <div class="invalid-feedback">Please provide a valid quantity.</div>

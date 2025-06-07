@@ -42,7 +42,6 @@ const getAllProducts = async (req, res, next) => {
  * @desc  GET products by id product
  * @route GET /products/:id
  */
-
 const getProductById = async (req, res, next) => {
   const productId = req.params.id;
 
@@ -140,10 +139,35 @@ const deleteProductById = async (req, res, next) => {
   }
 };
 
+/**
+ * @desc  GET products edit form
+ * @route GET /products/edit/:id
+ */
+const getEditProduct = async (req, res, next) => {
+  console.log("goes here");
+  const productId = req.params.id;
+
+  try {
+    // Fetch data
+    const product = await productRepository.getProductById(productId);
+    if (!product) {
+      const err = new Error("Product not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    // Render the view
+    res.render("product/edit", { product, getContrastColor });
+  } catch (error) {
+    return next(new Error(error.message || "Internal server error"));
+  }
+};
+
 export default {
   getAllProducts,
   getProductById,
   getCreate,
   postCreate,
   deleteProductById,
+  getEditProduct,
 };
