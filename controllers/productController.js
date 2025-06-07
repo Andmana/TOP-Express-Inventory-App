@@ -128,6 +128,13 @@ const deleteProductById = async (req, res, next) => {
       return next(err);
     }
 
+    if (product.is_sample) {
+      {
+        const err = new Error("Sample Product cannot deleted");
+        err.status = 404;
+        return next(err);
+      }
+    }
     const isDeleted = await productRepository.deleteProductById(product.id);
     if (!isDeleted) {
       const err = new Error("System error");

@@ -21,8 +21,7 @@ INSERT INTO categories (name, color, icon_src) VALUES
   ('Beverages', '#1E90FF', '/icons/beverages.svg');
 
 
-  DROP TABLE IF EXISTS products;
-
+DROP TABLE IF EXISTS products;
 CREATE TABLE products (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name VARCHAR(255) UNIQUE,
@@ -31,30 +30,30 @@ CREATE TABLE products (
   category_id INTEGER,
   quantity INTEGER,
   brand VARCHAR(256), 
-  icon_src VARCHAR(255)
+  icon_src VARCHAR(255),
+  is_sample BOOLEAN DEFAULT FALSE
 );
 
-INSERT INTO products (name, description, price, category_id, quantity, brand, icon_src) VALUES
+INSERT INTO products (name, description, price, category_id, quantity, brand, icon_src, is_sample) VALUES
 -- Fruits (category_id = 1)
-('Red Apples', 'Fresh and crispy red apples.', 2.99, 1, 50, 'NatureFarms', '/icons/apple.svg'),
-('Bananas', 'Sweet ripe bananas.', 1.49, 1, 100, 'TropicalFresh', '/icons/banana.svg'),
+('Red Apples', 'Fresh and crispy red apples.', 2.99, 1, 50, 'NatureFarms', '/icons/apple.svg', true),
+('Bananas', 'Sweet ripe bananas.', 1.49, 1, 100, 'TropicalFresh', '/icons/banana.svg', true),
 
 -- Vegetables (category_id = 2)
-('Carrots', 'Organic orange carrots.', 0.99, 2, 80, 'GreenGrow', '/icons/carrot.svg'),
-('Spinach', 'Fresh baby spinach.', 1.99, 2, 60, 'LeafyLand', '/icons/spinach.svg'),
+('Carrots', 'Organic orange carrots.', 0.99, 2, 80, 'GreenGrow', '/icons/carrot.svg', true),
+('Spinach', 'Fresh baby spinach.', 1.99, 2, 60, 'LeafyLand', '/icons/spinach.svg', true),
 
 -- Dairy (category_id = 3)
-('Whole Milk', 'Creamy whole milk, 1L.', 1.89, 3, 200, 'default', 'icons/milk.svg'),
-('Cheddar Cheese', 'Aged cheddar block, 200g.', 3.49, 3, 40, 'default', '/icons/cheese.svg'),
+('Whole Milk', 'Creamy whole milk, 1L.', 1.89, 3, 200, 'default', '/icons/milk.svg', true),
+('Cheddar Cheese', 'Aged cheddar block, 200g.', 3.49, 3, 40, 'default', '/icons/cheese.svg', true),
 
 -- Bakery (category_id = 4)
-('Sourdough Bread', 'Handmade sourdough loaf.', 2.49, 4, 30, 'BakersDaily', '/icons/bread.svg'),
-('Croissant', 'Buttery croissant pastry.', 1.29, 4, 60, 'ParisBake', '/icons/croissant.svg'),
+('Sourdough Bread', 'Handmade sourdough loaf.', 2.49, 4, 30, 'BakersDaily', '/icons/bread.svg', true),
+('Croissant', 'Buttery croissant pastry.', 1.29, 4, 60, 'ParisBake', '/icons/croissant.svg', true),
 
 -- Beverages (category_id = 5)
-('Orange Juice', 'Freshly squeezed, 500ml.', 2.59, 5, 70, 'JuicyJoy', '/icons/juice.svg'),
-('Coffee Beans', 'Medium roast Arabica beans.', 7.99, 5, 25, 'BeanBrew', '/icons/coffe.svg');
-
+('Orange Juice', 'Freshly squeezed, 500ml.', 2.59, 5, 70, 'JuicyJoy', '/icons/juice.svg', true),
+('Coffee Beans', 'Medium roast Arabica beans.', 7.99, 5, 25, 'BeanBrew', '/icons/coffe.svg', true);
 
 `;
 

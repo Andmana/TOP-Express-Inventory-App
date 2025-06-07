@@ -47,7 +47,8 @@ async function getProductById(id) {
       c.id AS category_id,
       c.name AS category_name,
       c.color AS category_color,
-      c.icon_src AS category_icon
+      c.icon_src AS category_icon,
+      p.is_sample
     FROM products p
     JOIN categories c ON p.category_id = c.id
     WHERE p.id = ${id}

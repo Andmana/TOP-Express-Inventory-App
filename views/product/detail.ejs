@@ -38,7 +38,7 @@
             <%= product.category_name %>
           </p>
           <p class="m-0 h3 ">
-              Brand : <%= product.Brand || "-" %>
+              Brand : <%= product.brand || "-" %>
           </p>
 
           <p class="m-0 fw-medium"><%= product.description %></p>
@@ -48,7 +48,7 @@
             <a class="btn btn-light px-3" href="/products/edit/<%= product.id %>">Edit</a>
             <form action="/products/delete" method="post">
               <input type="text" name="id" value="<%= product.id %>" hidden>
-              <button type="submit" class="btn btn-danger delete-product">Delete</button>
+              <button type="submit" class="btn btn-danger delete-product" <%= product.is_default ? "disabled" : '' %>>Delete</button>
             </form>
           </div>
         </div>
