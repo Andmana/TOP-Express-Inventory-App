@@ -45,7 +45,7 @@ INSERT INTO products (name, description, price, category_id, quantity, brand, ic
 
 -- Dairy (category_id = 3)
 ('Whole Milk', 'Creamy whole milk, 1L.', 1.89, 3, 200, 'default', 'icons/milk.svg'),
-('Cheddar Cheese', 'Aged cheddar block, 200g.', 3.49, 3, 40, 'default', 'icons/cheese.svg'),
+('Cheddar Cheese', 'Aged cheddar block, 200g.', 3.49, 3, 40, 'default', '/icons/cheese.svg'),
 
 -- Bakery (category_id = 4)
 ('Sourdough Bread', 'Handmade sourdough loaf.', 2.49, 4, 30, 'BakersDaily', '/icons/bread.svg'),
