@@ -46,7 +46,10 @@
 
           <div class="pt-4 d-flex gap-3 align-content-center justify-content-end">
             <a class="btn btn-light px-3" href="/products/edit/<%= product.id %>">Edit</a>
-            <button class="btn btn-danger">Delete</button>
+            <form action="/products/delete" method="post">
+              <input type="text" name="id" value="<%= product.id %>" hidden>
+              <button type="submit" class="btn btn-danger delete-product">Delete</button>
+            </form>
           </div>
         </div>
 

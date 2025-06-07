@@ -87,4 +87,18 @@ async function isNameExists(name, id = 0) {
   }
 }
 
-export default { getAllProducts, getProductById, createProduct, isNameExists };
+async function deleteProductById(id) {
+  const { rowCount } = await pool.query(`DELETE FROM products WHERE id = $1`, [
+    id,
+  ]);
+
+  return rowCount > 0; // returns true if a row was deleted, false otherwise
+}
+
+export default {
+  getAllProducts,
+  getProductById,
+  createProduct,
+  isNameExists,
+  deleteProductById,
+};

@@ -110,4 +110,40 @@ const postCreate = async (req, res, next) => {
   }
 };
 
-export default { getAllProducts, getProductById, getCreate, postCreate };
+/**
+ * @desc  DELETE  delete product by id
+ * @route DELETE /products/:id
+ */
+const deleteProductById = async (req, res, next) => {
+  const productId = req.body.id;
+
+  try {
+    const product = await productRepository.getProductById(productId);
+    if (!product) {
+      const err = new Error("Product not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    const isDeleted = await productRepository.deleteProductById(product.id);
+    if (!isDeleted) {
+      const err = new Error("System error");
+      err.status = 500;
+      return next(err);
+    }
+
+    return res.redirect("/products");
+  } catch (error) {
+    const err = new Error(error.message || "Invalid system");
+    err.status = 501;
+    return next(err);
+  }
+};
+
+export default {
+  getAllProducts,
+  getProductById,
+  getCreate,
+  postCreate,
+  deleteProductById,
+};
